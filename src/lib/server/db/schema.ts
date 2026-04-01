@@ -1,9 +1,11 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const task = sqliteTable('task', {
+export const inscriptions = sqliteTable('inscriptions', {
 	id: text('id')
 		.primaryKey()
 		.$defaultFn(() => crypto.randomUUID()),
-	title: text('title').notNull(),
-	priority: integer('priority').notNull().default(1)
+	name: text('name').notNull(),
+	scriptType: text('script_type', { enum: ['Brahmi', 'Vatteluttu'] }).notNull(),
+	content: text('content').notNull(),
+	translation: text('translation')
 });
