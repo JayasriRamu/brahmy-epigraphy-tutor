@@ -2,37 +2,115 @@
 	let { data } = $props();
 </script>
 
-<div class="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
-	<!-- Hero Section -->
-	<section class="container mx-auto px-4 py-16 text-center">
-		<h1 class="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl mb-6">
-			Discover Ancient Inscriptions
-		</h1>
-		<p class="mt-3 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-400 prose">
-			Explore a rich collection of historical inscriptions, categorized by their unique scripts and valuable content.
-			Delve into the past and uncover stories etched in stone and metal.
-		</p>
-	</section>
-
-	<!-- Inscriptions Grid Section -->
-	<section class="container mx-auto px-4 py-12">
-		<h2 class="text-4xl font-bold text-center mb-12">Our Collection</h2>
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-			{#each data.inscriptions as inscription (inscription.id)}
-				<div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-					<h3 class="text-2xl font-semibold mb-3">{inscription.name}</h3>
-					<p class="text-gray-700 dark:text-gray-300 mb-4 prose">
-						{inscription.content}
-					</p>
-					<div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
-						<span>Script: {inscription.scriptType}</span>
-						<!-- In a real app, this would link to a detail page like `/inscriptions/${inscription.id}` -->
-						<a href="#" class="text-blue-600 hover:underline dark:text-blue-400">View Details</a>
-					</div>
-				</div>
-			{:else}
-				<p class="col-span-full text-center text-gray-600 dark:text-gray-400">No inscriptions found.</p>
-			{/each}
+<div class="flex min-h-screen items-center justify-center bg-[#020617] p-6">
+	<div class="mx-auto flex w-full max-w-6xl flex-col items-center">
+		<!-- Header (compact) -->
+		<div class="mb-6 text-center">
+			<h1 class="font-cinzel text-3xl font-bold tracking-wider text-white">Brahmi Script</h1>
+			<p class="mt-1 text-sm text-slate-400">
+				Learn the ancient precursors to Tamil and other Indian scripts
+			</p>
 		</div>
-	</section>
+
+		<!-- Bento Grid (70vh to fit viewport) -->
+		<div class="grid h-[55vh] w-full grid-cols-12 grid-rows-2 gap-6">
+			<!-- Learn Card (8 cols, full height) -->
+			<a
+				href="/learn"
+				class="bento-card col-span-8 row-span-2 flex max-h-[500px] w-full flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-8 transition-all duration-300 hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/20"
+			>
+				<div class="mb-4 text-5xl">📜</div>
+				<h2 class="font-cinzel mb-3 text-2xl font-semibold tracking-wider text-white">
+					Learn the Alphabet
+				</h2>
+				<p class="mb-5 text-center text-sm leading-relaxed text-slate-400">
+					Master the ancient Brahmi script through interactive lessons
+				</p>
+				<div class="mb-5 flex gap-3">
+					<span
+						class="rounded-full border border-slate-500/50 px-4 py-1.5 text-lg font-medium text-slate-300"
+					>
+						12 Vowels
+					</span>
+					<span
+						class="rounded-full border border-slate-500/50 px-4 py-1.5 text-lg font-medium text-slate-300"
+					>
+						18 Consonants
+					</span>
+				</div>
+				<button class="btn-3d btn-3d-primary rounded-2xl">
+					Start Learning
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 5l7 7-7 7"
+						/>
+					</svg>
+				</button>
+			</a>
+
+			<!-- Explore Inscriptions Card (4 cols, top half) -->
+			<a
+				href="/inscriptions"
+				class="bento-card col-span-4 row-span-1 flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-6 transition-all duration-300 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20"
+			>
+				<div class="mb-2 text-4xl">🗿</div>
+				<h2 class="font-cinzel mb-1 text-lg font-semibold tracking-wider text-white">
+					Explore Inscriptions
+				</h2>
+				<p class="mb-2 text-center text-xs text-slate-400">Discover ancient Brahmi inscriptions</p>
+				<div class="mt-auto flex items-center gap-2 text-emerald-400">
+					<span class="text-sm font-medium">Browse</span>
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 5l7 7-7 7"
+						/>
+					</svg>
+				</div>
+			</a>
+
+			<!-- Daily Challenge Card (4 cols, bottom half) -->
+			<a
+				href="/practice"
+				class="bento-card col-span-4 row-span-1 flex flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-[#1e293b] to-[#0f172a] p-6 transition-all duration-300 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20"
+			>
+				<div class="mb-2 text-4xl">🎯</div>
+				<h2 class="font-cinzel mb-1 text-lg font-semibold tracking-wider text-white">
+					Daily Challenge
+				</h2>
+				<p class="mb-2 text-center text-xs text-slate-400">Test your knowledge</p>
+				<div class="mt-auto flex items-center gap-2 text-blue-400">
+					<span class="text-sm font-medium">Practice</span>
+					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 5l7 7-7 7"
+						/>
+					</svg>
+				</div>
+			</a>
+		</div>
+	</div>
 </div>
+
+<style>
+	.font-cinzel {
+		font-family: 'Cinzel', serif;
+	}
+
+	.bento-card {
+		box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+	}
+
+	.bento-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 0 rgba(0, 0, 0, 0.3);
+	}
+</style>

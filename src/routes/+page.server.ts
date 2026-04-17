@@ -1,10 +1,9 @@
-import { db } from '$lib/server/db/client';
-import { inscriptions } from '$lib/server/db/schema';
+import { turso } from '$lib/server/turso';
 
 export async function load() {
-	const allInscriptions = await db.select().from(inscriptions);
+	const result = await turso.execute('SELECT * FROM inscriptions');
 
 	return {
-		inscriptions: allInscriptions
+		inscriptions: result.rows
 	};
 }
