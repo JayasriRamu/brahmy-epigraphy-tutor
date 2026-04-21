@@ -5,8 +5,8 @@
 
 	let { data }: { data: { inscription: { id: string; content: string; name: string } } } = $props();
 
-	const allVowels: LessonItem[] = Object.entries(ALPHABET)
-		.filter(([, v]) => v.type === 'Uyir')
+	const allVowels = Object.entries(ALPHABET)
+		.filter((entry): entry is [string, BrahmiChar] => entry[1].type === 'Uyir')
 		.map(([key, v]) => ({
 			key,
 			tamil: v.tamil,
@@ -15,8 +15,11 @@
 			type: v.type
 		}));
 
-	const allConsonants: LessonItem[] = Object.entries(ALPHABET)
-		.filter(([, v]) => v.type === 'Mei' || v.type === 'Uyirmei')
+	const allConsonants = Object.entries(ALPHABET)
+		.filter(
+			(entry): entry is [string, BrahmiChar] =>
+				entry[1].type === 'Mei' || entry[1].type === 'Uyirmei'
+		)
 		.map(([key, v]) => ({
 			key,
 			tamil: v.tamil,

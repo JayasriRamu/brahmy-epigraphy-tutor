@@ -1,6 +1,10 @@
-import { Database } from 'bun:sqlite';
-import { drizzle } from 'drizzle-orm/bun-sqlite';
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
 import * as schema from './schema';
 
-const sqlite = new Database('./sqlite.db');
-export const db = drizzle(sqlite, { schema });
+const client = createClient({
+	url: process.env.DATABASE_URL || 'file:local.db',
+	authToken: process.env.DATABASE_AUTH_TOKEN
+});
+
+export const db = drizzle(client, { schema });

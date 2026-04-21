@@ -111,6 +111,18 @@
 		}
 		if (e.key === 'ArrowRight') nextSlider();
 		if (e.key === 'ArrowLeft') prevSlider();
+		if (e.key === '1') {
+			activeTab = 'vowels';
+			sliderIndex = 0;
+		}
+		if (e.key === '2') {
+			activeTab = 'consonants';
+			sliderIndex = 0;
+		}
+		if (e.key === '3') {
+			activeTab = 'special';
+			sliderIndex = 0;
+		}
 	}
 
 	function nextChallenge() {
@@ -186,30 +198,30 @@
 
 <!-- Global Nav -->
 <nav
-	class="flex min-h-[80px] w-full items-center justify-center gap-12 border-b border-white/5 py-8 text-center"
+	class="flex min-h-[80px] w-full items-center justify-center gap-12 border-b border-[#e7e0ec] py-6 text-center"
 >
 	<div class="flex justify-center gap-8">
 		<button
 			onclick={() => startMode('study')}
 			class="text-base font-medium transition-colors {mode === 'study'
-				? 'font-semibold text-white'
-				: 'text-white/30 hover:text-white/60'}"
+				? 'font-semibold text-[#6750a4]'
+				: 'text-[#49454f] hover:text-[#6750a4]'}"
 		>
 			Study
 		</button>
 		<button
 			onclick={() => startMode('challenge')}
 			class="text-base font-medium transition-colors {mode === 'challenge'
-				? 'font-semibold text-white'
-				: 'text-white/30 hover:text-white/60'}"
+				? 'font-semibold text-[#6750a4]'
+				: 'text-[#49454f] hover:text-[#6750a4]'}"
 		>
 			Challenge
 		</button>
 		<button
 			onclick={() => startMode('word')}
 			class="text-base font-medium transition-colors {mode === 'word'
-				? 'font-semibold text-white'
-				: 'text-white/30 hover:text-white/60'}"
+				? 'font-semibold text-[#6750a4]'
+				: 'text-[#49454f] hover:text-[#6750a4]'}"
 		>
 			Word Building
 		</button>
@@ -217,11 +229,11 @@
 </nav>
 
 <!-- Main Content -->
-<div class="flex min-h-screen flex-col bg-[#0f172a] font-sans text-white">
+<div class="flex min-h-screen flex-col bg-[#fef7ff] font-sans text-[#1c1b1f]">
 	<!-- Main Header Section -->
 	<header class="flex flex-col items-center gap-6 py-16 pb-12">
-		<h1 class="font-cinzel text-5xl font-bold text-white">Brahmi Script Tutor</h1>
-		<p class="text-sm text-slate-400">
+		<h1 class="font-cinzel text-5xl font-bold text-[#1c1b1f]">Brahmi Script Tutor</h1>
+		<p class="text-sm text-[#49454f]">
 			{#if mode === 'study'}Master the ancient precursors to the Tamil script.
 			{:else if mode === 'challenge'}Test your character recognition.
 			{:else}Connect the letters to form words.{/if}
@@ -229,15 +241,15 @@
 
 		{#if mode === 'study'}
 			<!-- Tab Switcher -->
-			<div class="mt-4 flex gap-8 rounded-full bg-white/5 px-8 py-3">
+			<div class="mt-4 flex gap-8 rounded-full bg-[#f3edf7] px-8 py-3">
 				<button
 					onclick={() => {
 						activeTab = 'vowels';
 						sliderIndex = 0;
 					}}
 					class="text-lg font-medium transition-colors {activeTab === 'vowels'
-						? 'text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]'
-						: 'text-white/30 hover:text-white/60'}"
+						? 'font-semibold text-[#6750a4]'
+						: 'text-[#49454f] hover:text-[#6750a4]'}"
 				>
 					Vowels
 				</button>
@@ -247,8 +259,8 @@
 						sliderIndex = 0;
 					}}
 					class="text-lg font-medium transition-colors {activeTab === 'consonants'
-						? 'text-white'
-						: 'text-white/30 hover:text-white/60'}"
+						? 'font-semibold text-[#6750a4]'
+						: 'text-[#49454f] hover:text-[#6750a4]'}"
 				>
 					Consonants
 				</button>
@@ -258,8 +270,8 @@
 						sliderIndex = 0;
 					}}
 					class="text-lg font-medium transition-colors {activeTab === 'special'
-						? 'text-white'
-						: 'text-white/30 hover:text-white/60'}"
+						? 'font-semibold text-[#6750a4]'
+						: 'text-[#49454f] hover:text-[#6750a4]'}"
 				>
 					Special
 				</button>
@@ -272,9 +284,9 @@
 						lessonMode = !lessonMode;
 						sliderIndex = 0;
 					}}
-					class="rounded-xl px-6 py-3 text-sm font-medium transition-all {lessonMode
-						? 'border border-white/30 bg-white/20 text-white backdrop-blur-md hover:bg-white/30 active:scale-95'
-						: 'border border-white/10 bg-white/5 text-white backdrop-blur-md hover:bg-white/10'}"
+					class="rounded-full px-8 py-3 text-sm font-medium shadow-md transition-all {lessonMode
+						? 'bg-[#6750a4] text-white hover:bg-[#7f67be]'
+						: 'bg-[#f3edf7] text-[#6750a4] hover:bg-[#e8def8]'}"
 				>
 					{lessonMode ? 'Exit Lesson Mode' : 'Enter Lesson Mode'}
 				</button>
@@ -288,18 +300,16 @@
 			<!-- LESSON MODE VIEW -->
 			<div class="relative flex min-h-[600px] w-full items-center justify-center">
 				<div class="mx-auto w-full max-w-3xl px-4">
-					<div
-						class="rounded-3xl border border-white/10 bg-slate-800/50 p-10 text-center shadow-2xl backdrop-blur-md"
-					>
+					<div class="rounded-3xl border border-[#cac4d0] bg-[#f3edf7] p-10 text-center shadow-lg">
 						<!-- Progress Bar -->
 						<div class="mb-8">
 							<div class="mb-3 flex items-center justify-between text-sm">
 								<span
 									class={tabColor === 'amber'
-										? 'text-amber-400'
+										? 'text-[#b08d00]'
 										: tabColor === 'emerald'
-											? 'text-emerald-400'
-											: 'text-blue-400'}
+											? 'text-[#14b8a6]'
+											: 'text-[#6750a4]'}
 								>
 									{activeTab === 'vowels'
 										? 'Vowel'
@@ -307,22 +317,22 @@
 											? 'Consonant'
 											: 'Special'}
 								</span>
-								<span class="font-mono text-slate-400"
+								<span class="font-mono text-[#79747e]"
 									>{sliderIndex + 1} of {currentTabChars.length}</span
 								>
 							</div>
-							<div class="h-1 overflow-hidden rounded-full bg-white/10 backdrop-blur-sm">
+							<div class="h-1 overflow-hidden rounded-full bg-[#e7e0ec]">
 								<div
-									class="h-full rounded-full bg-white shadow-[0_0_8px_#fff,0_0_16px_rgba(255,255,255,0.5)] transition-all duration-500"
+									class="h-1 rounded-full bg-[#6750a4] transition-all duration-500"
 									style="width: {progressPercent}%"
 								></div>
 							</div>
 						</div>
 
-						<!-- Glowing Brahmi Character -->
+						<!-- Brahmi Character -->
 						{#key sliderIndex}
 							<div
-								class="mb-8 flex h-64 items-center justify-center font-serif text-[14rem] leading-none text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]"
+								class="font-brahmi mb-8 flex h-64 items-center justify-center text-[14rem] leading-none text-[#381e72]"
 								in:fly={{ x: sliderDirection === 'right' ? 50 : -50, duration: 300 }}
 							>
 								{currentSliderChar.brahmi}
@@ -330,19 +340,19 @@
 						{/key}
 
 						<!-- Info Row -->
-						<div class="flex items-center justify-center gap-12 border-t border-white/10 pt-8">
+						<div class="flex items-center justify-center gap-12 border-t border-[#e7e0ec] pt-8">
 							<div class="text-center">
-								<span class="mb-1 block text-xs tracking-widest text-slate-500 uppercase"
+								<span class="mb-1 block text-xs tracking-widest text-[#79747e] uppercase"
 									>Phonetic</span
 								>
-								<span class="text-3xl font-bold text-white">{currentSliderChar.phonetic}</span>
+								<span class="text-3xl font-bold text-[#381e72]">{currentSliderChar.phonetic}</span>
 							</div>
-							<div class="h-12 w-px bg-white/20"></div>
+							<div class="h-12 w-px bg-[#cac4d0]"></div>
 							<div class="text-center">
-								<span class="mb-1 block text-xs tracking-widest text-slate-500 uppercase"
+								<span class="mb-1 block text-xs tracking-widest text-[#79747e] uppercase"
 									>Tamil</span
 								>
-								<span class="text-3xl font-bold text-white">{currentSliderChar.tamil}</span>
+								<span class="text-3xl font-bold text-[#14b8a6]">{currentSliderChar.tamil}</span>
 							</div>
 						</div>
 
@@ -351,7 +361,9 @@
 							<button
 								onclick={prevSlider}
 								disabled={sliderIndex === 0}
-								class="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/40 backdrop-blur-md transition-all hover:border-white/40 hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-20"
+								aria-label="Previous character"
+								title="Previous (Left Arrow)"
+								class="flex h-12 w-12 items-center justify-center rounded-full bg-[#eaddff] text-[#21005d] shadow-sm transition-all hover:bg-[#d0bcff] disabled:cursor-not-allowed disabled:opacity-30"
 							>
 								<svg
 									class="h-5 w-5"
@@ -366,7 +378,9 @@
 							<button
 								onclick={nextSlider}
 								disabled={sliderIndex === currentTabChars.length - 1}
-								class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_0_15px_rgba(255,255,255,0.2)] transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
+								aria-label="Next character"
+								title="Next (Right Arrow)"
+								class="flex h-12 w-12 items-center justify-center rounded-full bg-[#6750a4] text-white shadow-md transition-all hover:scale-105 hover:bg-[#7f67be] active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
 							>
 								<svg
 									class="h-5 w-5"
@@ -379,6 +393,11 @@
 								</svg>
 							</button>
 						</div>
+
+						<!-- Keyboard Shortcuts Hint -->
+						<p class="mt-4 text-center text-xs text-[#79747e]">
+							Use ← → arrows or 1, 2, 3 to switch tabs. Press Esc to exit.
+						</p>
 					</div>
 				</div>
 			</div>
@@ -391,37 +410,27 @@
 							{#each consonantSections as section}
 								<div class="w-full">
 									<h2
-										class="font-cinzel mb-6 w-full text-center text-xl font-semibold tracking-widest uppercase {section.color ===
-										'red'
-											? 'text-red-400'
-											: section.color === 'blue'
-												? 'text-blue-400'
-												: 'text-purple-400'}"
+										class="mb-6 w-full text-center text-lg font-bold tracking-widest text-[#49454f] uppercase"
 									>
 										{section.name}
-										<span class="text-sm font-normal text-slate-500">({section.subtitle})</span>
+										<span class="ml-2 text-xs font-normal text-[#79747e]">({section.subtitle})</span
+										>
 									</h2>
 									<div
 										class="mx-auto grid max-w-[1200px] grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6"
 									>
 										{#each section.chars as char}
 											<div
-												class="alphabet-card flex h-56 w-full flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4 text-center shadow-lg backdrop-blur-md transition-all hover:border-{section.color ===
-												'red'
-													? 'red'
-													: section.color === 'blue'
-														? 'blue'
-														: 'purple'}-500/50"
+												class="alphabet-card font-brahmi flex h-56 w-full flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] p-4 text-center shadow-[0_4px_12px_rgba(103,80,164,0.1)] transition-all hover:border-[#6750a4] hover:shadow-[0_4px_12px_rgba(103,80,164,0.15)]"
 											>
-												<div
-													class="mb-4 text-[3.5rem] leading-none text-slate-50"
-													style="text-shadow: 0 0 12px rgba(255,255,255,0.3);"
-												>
+												<div class="font-brahmi mb-6 text-[3.5rem] leading-none text-[#381e72]">
 													{char.brahmi}
 												</div>
-												<div class="flex flex-col items-center gap-2 border-t border-white/10 pt-3">
-													<span class="text-4xl font-bold text-emerald-400">{char.tamil}</span>
-													<span class="text-xl text-white/80">{char.phonetic}</span>
+												<div
+													class="flex flex-col items-center gap-2 border-t border-[#e7e0ec] pt-3"
+												>
+													<span class="text-4xl font-bold text-[#14b8a6]">{char.tamil}</span>
+													<span class="text-xl text-[#49454f]">{char.phonetic}</span>
 												</div>
 											</div>
 										{/each}
@@ -431,12 +440,7 @@
 						</div>
 					{:else}
 						<h2
-							class="font-cinzel mt-12 mb-8 text-center text-xl font-semibold tracking-[0.2em] uppercase {tabColor ===
-							'amber'
-								? 'text-amber-400/80'
-								: tabColor === 'emerald'
-									? 'text-emerald-400'
-									: 'text-blue-400'}"
+							class="mt-12 mb-8 text-center text-lg font-bold tracking-[0.3em] text-[#49454f] uppercase"
 						>
 							{activeTab === 'vowels' ? 'THE 12 HOLY VOWELS' : 'SPECIAL CHARACTERS'}
 						</h2>
@@ -445,22 +449,14 @@
 						>
 							{#each currentTabChars as char}
 								<div
-									class="alphabet-card flex h-56 w-full flex-col items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4 text-center shadow-lg backdrop-blur-md transition-all hover:border-{tabColor ===
-									'amber'
-										? 'amber'
-										: tabColor === 'emerald'
-											? 'emerald'
-											: 'blue'}-500/50"
+									class="alphabet-card font-brahmi flex h-56 w-full flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] p-4 text-center shadow-[0_4px_12px_rgba(103,80,164,0.1)] transition-all hover:border-[#6750a4] hover:shadow-[0_4px_12px_rgba(103,80,164,0.15)]"
 								>
-									<div
-										class="mb-4 text-[3.5rem] leading-none text-slate-50"
-										style="text-shadow: 0 0 12px rgba(255,255,255,0.3);"
-									>
+									<div class="mb-6 text-[3.5rem] leading-none text-[#381e72]">
 										{char.brahmi}
 									</div>
-									<div class="flex flex-col items-center gap-2 border-t border-white/10 pt-3">
-										<span class="text-4xl font-bold text-emerald-400">{char.tamil}</span>
-										<span class="text-xl text-white/80">{char.phonetic}</span>
+									<div class="flex flex-col items-center gap-2 border-t border-[#e7e0ec] pt-3">
+										<span class="text-4xl font-bold text-[#14b8a6]">{char.tamil}</span>
+										<span class="text-xl text-[#49454f]">{char.phonetic}</span>
 									</div>
 								</div>
 							{/each}
@@ -471,22 +467,22 @@
 		{/if}
 	{:else if mode === 'challenge'}
 		<section
-			class="mx-auto max-w-md rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-md"
+			class="mx-auto max-w-md rounded-2xl border border-[#e7e0ec] bg-[#f3edf7] p-8 shadow-lg"
 		>
-			<div class="mb-4 flex justify-between text-sm tracking-widest text-slate-400 uppercase">
+			<div class="mb-4 flex justify-between text-sm tracking-widest text-[#49454f] uppercase">
 				<span>Challenge Mode</span>
 				<span>Score: {score}</span>
 			</div>
-			<h3 class="mb-1 text-center text-slate-400">Find the character for:</h3>
-			<div class="mb-6 text-center text-6xl font-black text-white uppercase">
+			<h3 class="mb-1 text-center text-[#49454f]">Find the character for:</h3>
+			<div class="mb-6 text-center text-6xl font-black text-[#6750a4] uppercase">
 				{challengeTarget.phonetic}
 			</div>
-			<p class="mb-8 h-6 text-center text-blue-400">{challengeFeedback}</p>
-			<div class="grid grid-cols-5 gap-3">
+			<p class="mb-8 h-6 text-center text-[#6750a4]">{challengeFeedback}</p>
+			<div class="mx-auto grid grid-cols-5 gap-3">
 				{#each ALPHABET_ARRAY as char}
 					<button
 						onclick={() => checkChallenge(char)}
-						class="flex aspect-square items-center justify-center rounded-lg bg-white/5 text-2xl backdrop-blur-md transition-all hover:bg-white/10 active:scale-95"
+						class="font-brahmi flex aspect-square items-center justify-center rounded-lg border border-[#e7e0ec] bg-[#f3edf7] text-2xl text-[#6750a4] shadow-sm transition-all hover:bg-[#e8def8] active:scale-95"
 					>
 						{char.brahmi}
 					</button>
@@ -496,25 +492,25 @@
 	{:else if mode === 'word'}
 		<section class="mx-auto max-w-xl text-center">
 			<div
-				class="mb-8 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-md {showSuccess
-					? 'border-green-500'
+				class="mb-8 rounded-2xl border border-[#e7e0ec] bg-[#f3edf7] p-8 shadow-lg {showSuccess
+					? 'border-[#6750a4]'
 					: ''} transition-all"
 			>
-				<span class="text-sm font-semibold tracking-widest text-blue-500 uppercase"
+				<span class="text-sm font-semibold tracking-widest text-[#14b8a6] uppercase"
 					>Modern Tamil</span
 				>
 				<div
-					class="mb-2 text-6xl font-bold text-white uppercase transition-transform {showSuccess
+					class="mb-2 text-6xl font-bold text-[#1c1b1f] uppercase transition-transform {showSuccess
 						? 'scale-110'
 						: ''}"
 				>
 					{currentWord.tamil}
 				</div>
-				<p class="mb-6 text-slate-400 italic">{currentWord.english}</p>
+				<p class="mb-6 text-[#79747e] italic">{currentWord.english}</p>
 
 				<div class="mb-4 flex justify-center gap-2">
 					{#if showHint && hintInfo}
-						<div class="rounded-lg bg-yellow-500/20 px-4 py-2 text-sm text-yellow-400">
+						<div class="rounded-lg bg-[#ffd8e4] px-4 py-2 text-sm text-[#7d5260]">
 							Hint: Look for <span class="font-bold">{hintInfo.brahmi}</span>
 							({hintInfo.phonetic})
 						</div>
@@ -527,17 +523,17 @@
 							class="flex h-16 w-14 items-center justify-center rounded-lg border-2 text-3xl font-bold transition-all {userSequence[
 								i
 							]
-								? 'border-green-500 bg-green-500/10 text-white'
+								? 'border-[#6750a4] bg-[#e8def8] text-[#6750a4]'
 								: showHint && i === userSequence.length
-									? 'animate-pulse border-yellow-500 bg-yellow-500/10 text-yellow-400'
-									: 'border-white/10 bg-white/5 text-transparent backdrop-blur-md'}"
+									? 'animate-pulse border-[#ffd8e4] bg-[#ffd8e4] text-[#7d5260]'
+									: 'border-[#e7e0ec] bg-white text-transparent'}"
 						>
 							{userSequence[i] || ''}
 						</div>
 					{/each}
 				</div>
 
-				<p class="mb-4 text-sm font-medium {showSuccess ? 'text-green-400' : 'text-blue-400'}">
+				<p class="mb-4 text-sm font-medium {showSuccess ? 'text-[#6750a4]' : 'text-[#14b8a6]'}">
 					{wordFeedback}
 				</p>
 
@@ -546,8 +542,8 @@
 						onclick={toggleHint}
 						disabled={showSuccess || userSequence.length === currentWordBrahmi.length}
 						class="rounded-lg px-4 py-2 text-sm font-medium transition-colors {showHint
-							? 'bg-yellow-600 text-white'
-							: 'bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30'} disabled:opacity-50"
+							? 'bg-[#7d5260] text-white'
+							: 'bg-[#ffd8e4] text-[#7d5260] hover:bg-[#f9d8d8]'} disabled:opacity-50"
 					>
 						{showHint ? 'Hide Hint' : 'Show Hint'}
 					</button>
@@ -558,10 +554,10 @@
 						<button
 							onclick={() => handleWordInput(char.brahmi)}
 							disabled={showSuccess}
-							class="flex aspect-square items-center justify-center rounded text-xl transition-all hover:bg-blue-600 disabled:opacity-50 {hintHighlightIndex ===
+							class="flex aspect-square items-center justify-center rounded text-xl transition-all hover:bg-[#e8def8] disabled:opacity-50 {hintHighlightIndex ===
 							idx
-								? 'bg-yellow-500/50 ring-2 ring-yellow-400'
-								: 'bg-white/5 backdrop-blur-md hover:bg-white/10'}"
+								? 'bg-[#ffd8e4] ring-2 ring-[#6750a4]'
+								: 'bg-[#f3edf7] hover:bg-[#e8def8]'}"
 						>
 							{char.brahmi}
 						</button>

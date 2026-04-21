@@ -28,26 +28,29 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="flex h-screen overflow-hidden bg-[#020617] text-white">
+<div class="flex h-screen bg-[#fef7ff] text-[#1c1b1f]">
+	<!-- Sidebar (desktop) -->
 	<nav
-		class="z-50 hidden w-20 flex-col items-center border-r border-white/10 bg-[#0f172a] py-8 md:flex md:w-24"
+		class="z-50 hidden lg:flex lg:w-24 lg:flex-col lg:items-center lg:border-r lg:border-[#e7e0ec] lg:bg-[#f7f2fa] lg:py-6"
 	>
-		<a href="/" class="btn-3d btn-3d-ghost flex h-12 w-12 items-center justify-center rounded-xl">
+		<a
+			href="/"
+			class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#6750a4] text-white shadow-md"
+		>
 			<span class="text-xl">𑀩</span>
 		</a>
-
-		<div class="mt-8 flex flex-col gap-3">
+		<div class="mt-8 flex flex-col gap-2">
 			{#each navItems as item}
 				<a
 					href={item.href}
-					class="btn-3d btn-3d-ghost flex w-16 flex-col items-center justify-center gap-1 rounded-xl px-2 py-3 {isActive(
+					class="flex w-16 flex-col items-center justify-center gap-1 rounded-xl px-2 py-3 transition-all {isActive(
 						item.href
 					)
-						? 'ring-2 ring-amber-400'
-						: ''}"
+						? 'bg-[#e8def8] text-[#6750a4]'
+						: 'text-[#49454f] hover:bg-[#e7e0ec]'}"
 				>
 					<svg
-						class="h-5 w-5 {isActive(item.href) ? 'text-amber-400' : 'text-slate-400'}"
+						class="h-5 w-5"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -55,53 +58,48 @@
 					>
 						<path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
 					</svg>
-					<span
-						class="text-[10px] font-medium tracking-widest uppercase transition-opacity duration-200 {isActive(
-							item.href
-						)
-							? 'text-amber-400'
-							: 'text-slate-400 hover:text-white hover:opacity-100'}"
-					>
-						{item.label}
-					</span>
+					<span class="text-[10px] font-medium tracking-widest uppercase">{item.label}</span>
 				</a>
 			{/each}
 		</div>
 	</nav>
 
-	<main class="flex-1 overflow-y-auto p-4 pb-20 pl-24 md:p-10 md:pb-10 md:pl-28">
-		{@render children()}
-	</main>
+	<div class="flex flex-1 flex-col overflow-hidden">
+		<main class="flex-1 overflow-y-auto p-4 pb-24 lg:p-10 lg:pb-10 lg:pl-28">
+			{@render children()}
+		</main>
 
-	<nav
-		class="fixed right-0 bottom-0 left-0 z-50 flex border-t border-white/10 bg-[#0f172a] p-2 md:hidden"
-	>
-		{#each navItems as item}
-			<a
-				href={item.href}
-				class="btn-3d btn-3d-ghost flex flex-1 flex-col items-center justify-center gap-1 rounded-xl py-3 {isActive(
-					item.href
-				)
-					? 'text-amber-400'
-					: 'text-slate-400'}"
-			>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					stroke-width="1.5"
+		<!-- Bottom Nav (mobile) -->
+		<nav
+			class="fixed right-0 bottom-0 left-0 z-50 flex border-t border-[#e7e0ec] bg-[#f3edf7] p-2 lg:hidden"
+		>
+			{#each navItems as item}
+				<a
+					href={item.href}
+					class="flex flex-1 flex-col items-center justify-center gap-1 rounded-xl py-3 {isActive(
+						item.href
+					)
+						? 'text-[#6750a4]'
+						: 'text-[#49454f]'}"
 				>
-					<path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
-				</svg>
-				<span class="text-[10px] font-medium tracking-widest uppercase">{item.label}</span>
-			</a>
-		{/each}
-	</nav>
+					<svg
+						class="h-6 w-6"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke="currentColor"
+						stroke-width="1.5"
+					>
+						<path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
+					</svg>
+					<span class="text-[10px] font-medium tracking-widest uppercase">{item.label}</span>
+				</a>
+			{/each}
+		</nav>
+	</div>
 </div>
 
 <style>
 	:global(body) {
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 </style>

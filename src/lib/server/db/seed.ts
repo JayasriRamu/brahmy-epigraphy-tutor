@@ -1,38 +1,32 @@
-import { Database } from 'bun:sqlite';
-import { drizzle } from 'drizzle-orm/bun-sqlite';
-import * as schema from './schema'; // Import all schema exports
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
+import * as schema from './schema';
 
 async function main() {
-	// The database path typically comes from environment variables or a configuration.
-	// For a simple seed script, './sqlite.db' is a common development default.
-	// You might need to adjust this path based on your Drizzle configuration or how
-	// your main application connects to the database.
-	const dbPath = './sqlite.db';
+	const dbPath = process.env.DATABASE_URL || 'file:local.db';
+	const authToken = process.env.DATABASE_AUTH_TOKEN;
 
-	let sqlite: Database | null = null; // Initialize as nullable
 	try {
-		sqlite = new Database(dbPath);
-		const db = drizzle(sqlite, { schema });
+		const client = createClient({
+			url: dbPath,
+			authToken: authToken || undefined
+		});
+		const db = drizzle(client, { schema });
 
 		console.log(`Seeding database at ${dbPath}...`);
-
-		// Optional: Clear existing data for idempotent seeding
-		// console.log('Clearing existing inscriptions...');
-		// await db.delete(schema.inscriptions);
-		// console.log('Existing inscriptions cleared.');
 
 		const inscriptionsToInsert = [
 			{
 				id: crypto.randomUUID(),
 				name: 'Mangulam Inscription',
-				scriptType: 'Brahmi',
+				scriptType: 'Brahmi' as const,
 				content: 'Kaniyan Nanda-Asiriyan...',
 				translation: null
 			},
 			{
 				id: crypto.randomUUID(),
 				name: 'Pulankurichi Inscription',
-				scriptType: 'Vatteluttu',
+				scriptType: 'Vatteluttu' as const,
 				content: 'Ko-Chendan-Kootran...',
 				translation: null
 			}
@@ -44,11 +38,6 @@ async function main() {
 	} catch (error) {
 		console.error('Seed script failed:', error);
 		process.exit(1);
-	} finally {
-		if (sqlite) {
-			sqlite.close();
-			console.log('Database connection closed.');
-		}
 	}
 }
 

@@ -34,6 +34,7 @@
 	let audioContext: AudioContext | null = null;
 
 	function playDing() {
+		if (!soundEnabled) return;
 		if (!audioContext) {
 			audioContext = new AudioContext();
 		}
@@ -55,6 +56,7 @@
 	}
 
 	function playThud() {
+		if (!soundEnabled) return;
 		if (!audioContext) {
 			audioContext = new AudioContext();
 		}
@@ -88,6 +90,7 @@
 	let wrongCount = $state(0);
 	let showFlash = $state(false);
 	let flashId = $state('');
+	let soundEnabled = $state(true);
 
 	function initGame() {
 		pairs = getRandomPairs(6);
@@ -152,7 +155,7 @@
 				wrongBrahmiIds = [];
 				selectedTamilId = null;
 				selectedBrahmiId = null;
-			}, 600);
+			}, 500);
 		}
 	}
 
@@ -172,12 +175,14 @@
 	const showHints = $derived(showHint || wrongCount >= 2);
 </script>
 
-<div class="flex min-h-screen flex-col items-center bg-[#0f172a] px-4 py-12">
+<div
+	class="flex min-h-screen flex-col items-center bg-[#fef7ff] px-4 py-12 font-sans text-[#1c1b1f]"
+>
 	<!-- Match Flash Effect -->
 	{#if showFlash}
 		<div class="pointer-events-none fixed inset-0 z-40" transition:fly={{ duration: 400 }}>
 			<div
-				class="bg-gradient-radial animate-flash absolute inset-0 from-emerald-500/20 via-transparent to-transparent"
+				class="bg-gradient-radial animate-flash absolute inset-0 from-[#ffd8e4] via-transparent to-transparent"
 			></div>
 		</div>
 	{/if}
@@ -185,73 +190,77 @@
 	<div class="mx-auto w-full max-w-4xl">
 		<!-- Header -->
 		<div class="mb-8 text-center">
-			<h1 class="font-cinzel mb-2 text-3xl font-bold tracking-wider text-white">
+			<h1 class="font-cinzel mb-2 text-3xl font-bold tracking-wider text-[#1c1b1f]">
 				TWO-COLUMN MATCH
 			</h1>
-			<p class="text-sm text-slate-400">Match Tamil to Brahmi characters</p>
+			<p class="text-sm text-[#49454f]">Match Tamil to Brahmi characters</p>
 		</div>
 
 		<!-- Progress & Controls -->
 		<div class="mb-8 flex flex-col items-center gap-4">
-			<!-- HUD Capsule -->
-			<div
-				class="flex items-center gap-6 rounded-full border border-white/10 bg-white/5 px-6 py-3 shadow-xl backdrop-blur-md"
-			>
-				<!-- Circular Progress -->
-				<div class="relative h-12 w-12">
-					<svg class="h-12 w-12 -rotate-90" viewBox="0 0 48 48">
+			<!-- Circular Badges -->
+			<div class="flex items-center gap-4">
+				<!-- Progress Badge -->
+				<div
+					class="relative flex h-16 w-16 flex-col items-center justify-center rounded-full border border-[#e7e0ec] bg-[#f3edf7] shadow-sm"
+				>
+					<svg class="absolute h-16 w-16 -rotate-90" viewBox="0 0 64 64">
+						<circle cx="32" cy="32" r="28" fill="none" stroke="#e7e0ec" stroke-width="3" />
 						<circle
-							cx="24"
-							cy="24"
-							r="20"
+							cx="32"
+							cy="32"
+							r="28"
 							fill="none"
-							stroke="rgba(255,255,255,0.1)"
-							stroke-width="3"
-						/>
-						<circle
-							cx="24"
-							cy="24"
-							r="20"
-							fill="none"
-							stroke="url(#progressGradient)"
+							stroke="#6750a4"
 							stroke-width="3"
 							stroke-linecap="round"
-							stroke-dasharray={2 * Math.PI * 20}
-							stroke-dashoffset={2 * Math.PI * 20 * (1 - progressPercent / 100)}
+							stroke-dasharray={2 * Math.PI * 28}
+							stroke-dashoffset={2 * Math.PI * 28 * (1 - progressPercent / 100)}
 							class="transition-all duration-500"
 						/>
 					</svg>
-					<div class="absolute inset-0 flex items-center justify-center">
-						<span class="text-xs font-bold text-emerald-400">{matchedIds.length}</span>
-					</div>
+					<span class="text-lg font-bold text-[#6750a4]">{matchedIds.length}</span>
 				</div>
 
-				<!-- Divider -->
-				<div class="h-8 w-px bg-white/20"></div>
-
-				<!-- Matched -->
-				<div class="flex items-center gap-2">
-					<span class="text-sm text-slate-400">Matched</span>
-					<span class="font-mono text-lg font-bold text-emerald-400">{matchedIds.length}/6</span>
+				<!-- Matched Badge -->
+				<div
+					class="flex h-16 w-16 flex-col items-center justify-center rounded-full bg-[#e8def8] shadow-sm"
+				>
+					<span class="text-xs text-[#49454f]">Matched</span>
+					<span class="text-lg font-bold text-[#6750a4]">{matchedIds.length}/6</span>
 				</div>
 
-				<!-- Divider -->
-				<div class="h-8 w-px bg-white/20"></div>
-
-				<!-- Attempts -->
-				<div class="flex items-center gap-2">
-					<span class="text-sm text-slate-400">Attempts</span>
-					<span class="font-mono text-lg font-bold text-amber-400">{attempts}</span>
+				<!-- Attempts Badge -->
+				<div
+					class="flex h-16 w-16 flex-col items-center justify-center rounded-full bg-[#ffd8e4] shadow-sm"
+				>
+					<span class="text-xs text-[#7d5260]">Attempts</span>
+					<span class="text-lg font-bold text-[#7d5260]">{attempts}</span>
 				</div>
 			</div>
 
-			<!-- Hint Button -->
-			<button
-				onclick={toggleHint}
-				class="rounded-full border border-white/20 bg-white/5 px-6 py-2 text-sm text-slate-400 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white"
-			>
-				{showHint ? 'Hide Hints' : 'Show Hints'}
-			</button>
+			<!-- Control Buttons -->
+			<div class="flex items-center gap-3">
+				<!-- Hint Button -->
+				<button
+					onclick={toggleHint}
+					class="rounded-full border border-[#79747e] px-4 py-1 text-sm text-[#6750a4] transition-all hover:bg-[#6750a4]/5"
+				>
+					{showHint ? '🔤 Hide Hints' : '💡 Show Hints'}
+				</button>
+
+				<!-- Sound Toggle -->
+				<button
+					onclick={() => (soundEnabled = !soundEnabled)}
+					aria-label={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+					title={soundEnabled ? 'Mute sounds' : 'Enable sounds'}
+					class="rounded-full border border-[#79747e] px-4 py-1 text-sm transition-all hover:bg-[#6750a4]/5 {soundEnabled
+						? 'text-[#6750a4]'
+						: 'text-[#79747e]'}"
+				>
+					{soundEnabled ? '🔊 Sound On' : '🔇 Sound Off'}
+				</button>
+			</div>
 		</div>
 
 		<!-- Game Board -->
@@ -259,7 +268,7 @@
 			<!-- Column A: Tamil -->
 			<div class="space-y-4">
 				<h2
-					class="font-cinzel mb-4 text-center text-sm font-semibold tracking-widest text-emerald-400 uppercase"
+					class="font-cinzel mb-4 text-center text-sm font-semibold tracking-widest text-[#14b8a6] uppercase"
 				>
 					Tamil
 				</h2>
@@ -274,24 +283,34 @@
 							<button
 								onclick={() => selectTamil(pair)}
 								disabled={isMatched}
-								class="flex h-36 w-full flex-col items-center justify-center rounded-2xl border border-t border-r border-b border-l border-black/40 border-white/20 bg-slate-800/40 shadow-xl backdrop-blur-md transition-all duration-300
+								class="flex h-36 w-full flex-col items-center justify-center rounded-2xl border border-[#e7e0ec] bg-[#f3edf7] shadow-[0_4px_12px_rgba(103,80,164,0.1)] transition-all duration-300
 									{isMatched
-									? 'scale-100 cursor-default border-emerald-500 bg-emerald-500/20 opacity-40 shadow-[0_0_20px_rgba(16,185,129,0.4)]'
+									? 'bg-[#d1e9cf] opacity-50'
 									: isWrong
-										? 'animate-shake border-red-500/50 bg-red-500/20'
+										? 'animate-shake border-[#ef4444]'
 										: isSelected
-											? 'border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3),inset_0_0_15px_rgba(16,185,129,0.2)]'
-											: 'hover:-translate-y-1 hover:border-white/30 hover:bg-white/10'}
+											? 'animate-pulse bg-[#e8def8] ring-4 ring-[#6750a4]/30'
+											: 'hover:-translate-y-1 hover:border-[#6750a4]/50 hover:shadow-[0_4px_12px_rgba(103,80,164,0.15)]'}
 									{isJustMatched ? 'animate-pop' : ''}"
 							>
-								<span class="text-6xl font-bold text-emerald-400">{pair.tamil}</span>
+								<span class="text-6xl font-bold text-[#14b8a6]">{pair.tamil}</span>
 								{#if showHintText}
-									<span class="mt-2 text-xs text-slate-500">{pair.phonetic}</span>
+									<span class="mt-2 text-xs text-[#79747e]">{pair.phonetic}</span>
 								{/if}
 							</button>
 							{#if isJustMatched}
 								<div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-									<div class="h-2 w-2 animate-ping rounded-full bg-emerald-400"></div>
+									<svg
+										class="h-10 w-10 animate-ping text-[#16a34a]"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+											clip-rule="evenodd"
+										/>
+									</svg>
 								</div>
 							{/if}
 						</div>
@@ -302,7 +321,7 @@
 			<!-- Column B: Brahmi -->
 			<div class="space-y-4">
 				<h2
-					class="font-cinzel mb-4 text-center text-sm font-semibold tracking-widest text-slate-300 uppercase"
+					class="font-cinzel mb-4 text-center text-sm font-semibold tracking-widest text-[#6750a4] uppercase"
 				>
 					Brahmi
 				</h2>
@@ -317,24 +336,34 @@
 							<button
 								onclick={() => selectBrahmi(pair)}
 								disabled={isMatched}
-								class="flex h-36 w-full flex-col items-center justify-center rounded-2xl border border-t border-r border-b border-l border-black/40 border-white/20 bg-slate-800/40 shadow-xl backdrop-blur-md transition-all duration-300
+								class="flex h-36 w-full flex-col items-center justify-center rounded-2xl border border-[#e7e0ec] bg-[#f3edf7] shadow-[0_4px_12px_rgba(103,80,164,0.1)] transition-all duration-300
 									{isMatched
-									? 'scale-100 cursor-default border-emerald-500 bg-emerald-500/20 opacity-40 shadow-[0_0_20px_rgba(16,185,129,0.4)]'
+									? 'bg-[#d1e9cf] opacity-50'
 									: isWrong
-										? 'animate-shake border-red-500/50 bg-red-500/20'
+										? 'animate-shake border-[#ef4444]'
 										: isSelected
-											? 'border-white shadow-[0_0_20px_rgba(255,255,255,0.3)]'
-											: 'hover:-translate-y-1 hover:border-white/30 hover:bg-white/10'}
+											? 'animate-pulse bg-[#e8def8] ring-4 ring-[#6750a4]/30'
+											: 'hover:-translate-y-1 hover:border-[#6750a4]/50 hover:shadow-[0_4px_12px_rgba(103,80,164,0.15)]'}
 									{isJustMatched ? 'animate-pop' : ''}"
 							>
-								<span class="text-6xl font-bold text-white">{pair.brahmi}</span>
+								<span class="font-brahmi text-6xl font-bold text-[#6750a4]">{pair.brahmi}</span>
 								{#if showHintText}
-									<span class="mt-2 text-xs text-slate-500">{pair.phonetic}</span>
+									<span class="mt-2 text-xs text-[#79747e]">{pair.phonetic}</span>
 								{/if}
 							</button>
 							{#if isJustMatched}
 								<div class="pointer-events-none absolute inset-0 flex items-center justify-center">
-									<div class="h-2 w-2 animate-ping rounded-full bg-emerald-400"></div>
+									<svg
+										class="h-10 w-10 animate-ping text-[#16a34a]"
+										fill="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+											clip-rule="evenodd"
+										/>
+									</svg>
 								</div>
 							{/if}
 						</div>
@@ -344,23 +373,23 @@
 		</div>
 
 		<!-- Instructions -->
-		<p class="mt-8 text-center text-sm text-slate-500">
+		<p class="mt-8 text-center text-sm text-[#79747e]">
 			Select a Tamil tile, then match it with the correct Brahmi tile
 		</p>
 	</div>
 
 	<!-- Win Modal -->
 	{#if showWin}
-		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+		<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
 			<div
-				class="animate-bounce-in rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-600/90 to-emerald-800/90 p-10 text-center shadow-2xl backdrop-blur-xl"
+				class="animate-bounce-in rounded-3xl border border-[#6750a4]/30 bg-gradient-to-br from-[#f3edf7] to-[#e8def8] p-10 text-center shadow-2xl"
 			>
 				<div class="mb-4 text-6xl">🎉</div>
-				<h2 class="mb-2 text-3xl font-bold text-white">Perfect Match!</h2>
-				<p class="mb-6 text-emerald-100">All 6 pairs matched in {attempts} attempts!</p>
+				<h2 class="mb-2 text-3xl font-bold text-[#1c1b1f]">Perfect Match!</h2>
+				<p class="mb-6 text-[#49454f]">All 6 pairs matched in {attempts} attempts!</p>
 				<button
 					onclick={nextSet}
-					class="rounded-xl bg-white/20 px-8 py-3 text-lg font-semibold text-white transition-all hover:scale-105 hover:bg-white/30"
+					class="rounded-xl bg-[#6750a4] px-8 py-3 text-lg font-semibold text-white transition-all hover:scale-105 hover:bg-[#7f67be]"
 				>
 					Next Set
 				</button>

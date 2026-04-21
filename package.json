@@ -28,6 +28,7 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.1.18",
 		"@types/node": "^24",
+		"@vite-pwa/sveltekit": "^1.1.0",
 		"drizzle-kit": "^0.31.8",
 		"drizzle-orm": "^0.45.2",
 		"eslint": "^10.0.3",
