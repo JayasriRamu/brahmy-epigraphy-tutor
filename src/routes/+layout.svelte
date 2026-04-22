@@ -28,16 +28,16 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="flex h-screen bg-[#fef7ff] text-[#1c1b1f]">
+<div class="flex h-screen overflow-hidden bg-[#fef7ff] text-[#1c1b1f]">
 	<!-- Sidebar (desktop) -->
 	<nav
-		class="z-50 hidden lg:flex lg:w-24 lg:flex-col lg:items-center lg:border-r lg:border-[#e7e0ec] lg:bg-[#f7f2fa] lg:py-6"
+		class="z-50 hidden w-20 flex-col items-center border-r border-[#e7e0ec] bg-[#f7f2fa] py-6 lg:flex lg:w-24"
 	>
 		<a
 			href="/"
-			class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#6750a4] text-white shadow-md"
+			class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl bg-[#6750a4] shadow-md lg:h-12 lg:w-12"
 		>
-			<span class="text-xl">𑀩</span>
+			<img src="/images/logo.png" alt="Logo" class="h-8 w-8 object-contain lg:h-10 lg:w-10" />
 		</a>
 		<div class="mt-8 flex flex-col gap-2">
 			{#each navItems as item}
@@ -65,20 +65,21 @@
 	</nav>
 
 	<div class="flex flex-1 flex-col overflow-hidden">
-		<main class="flex-1 overflow-y-auto p-4 pb-24 lg:p-10 lg:pb-10 lg:pl-28">
+		<main class="flex-1 overflow-y-auto p-2 pb-24 md:p-4 md:pb-24 lg:p-4 lg:pb-10 lg:pl-28">
 			{@render children()}
 		</main>
 
 		<!-- Bottom Nav (mobile) -->
 		<nav
-			class="fixed right-0 bottom-0 left-0 z-50 flex border-t border-[#e7e0ec] bg-[#f3edf7] p-2 lg:hidden"
+			class="fixed right-0 bottom-0 left-0 z-50 flex h-16 flex-shrink-0 items-center justify-around border-t border-[#e7e0ec] bg-[#f3edf7] md:hidden"
 		>
+			<a href="/" class="flex items-center justify-center">
+				<img src="/images/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
+			</a>
 			{#each navItems as item}
 				<a
 					href={item.href}
-					class="flex flex-1 flex-col items-center justify-center gap-1 rounded-xl py-3 {isActive(
-						item.href
-					)
+					class="flex flex-1 flex-col items-center justify-center gap-1 {isActive(item.href)
 						? 'text-[#6750a4]'
 						: 'text-[#49454f]'}"
 				>

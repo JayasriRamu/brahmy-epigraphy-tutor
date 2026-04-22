@@ -2,25 +2,27 @@
 	let { data } = $props();
 </script>
 
-<div class="flex min-h-screen items-center justify-center bg-[#fef7ff] p-2 md:p-8">
-	<div class="mx-auto flex w-full max-w-5xl flex-col items-center">
+<div class="flex min-h-screen items-start justify-center bg-[#fef7ff] p-2 md:p-8">
+	<div class="mx-auto w-full max-w-[320px] md:max-w-5xl">
 		<!-- Header -->
-		<div class="mb-2 text-center md:mb-10">
-			<h1 class="font-cinzel text-lg font-bold tracking-wider text-[#1c1b1f] md:text-4xl">
+		<div class="mb-2 text-center md:mb-6" style="margin-top: 30px;">
+			<h1
+				class="font-cinzel text-lg font-bold tracking-wider text-[#6750a4] md:text-4xl"
+				style="text-shadow: 2px 2px 0px rgba(103, 80, 164, 0.3);"
+			>
 				BRAHMI SCRIPT
 			</h1>
-			<p class="mt-1 text-[10px] text-[#49454f] md:text-sm">
+			<p class="mt-0 text-[10px] text-[#49454f] md:text-sm">
 				Learn the ancient precursors to Tamil
 			</p>
 		</div>
 
 		<!-- Bento Grid -->
-		<div class="grid w-full grid-cols-1 gap-4 md:grid-cols-12 md:grid-rows-2 md:gap-6">
+		<div class="grid w-full grid-cols-1 gap-4 pt-4 md:grid-cols-12 md:grid-rows-2 md:gap-6 md:pt-0">
 			<!-- Learn Card (big) -->
 			<a
 				href="/learn"
-				style="width: 85%; margin: 0 auto;"
-				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-purple-100 bg-[#f3edf7] py-6 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-8 md:row-span-2 md:mx-0 md:w-auto md:px-12 md:py-10"
+				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-purple-100 bg-[#f3edf7] px-2 py-6 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-8 md:row-span-2 md:px-12 md:py-10"
 			>
 				<div class="mb-2 text-2xl md:text-5xl">📜</div>
 				<h2
@@ -53,8 +55,7 @@
 			<!-- Explore Inscriptions Card -->
 			<a
 				href="/inscriptions"
-				style="width: 85%; margin: 0 auto;"
-				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] py-4 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-4 md:mx-0 md:w-auto md:px-8 md:py-8"
+				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] px-2 py-4 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-4 md:px-8 md:py-8"
 			>
 				<div class="mb-1 text-xl md:text-4xl">🗿</div>
 				<h2 class="font-cinzel text-xs font-semibold tracking-wider text-[#6750a4] md:text-lg">
@@ -66,8 +67,7 @@
 			<!-- Daily Challenge Card -->
 			<a
 				href="/practice"
-				style="width: 85%; margin: 0 auto;"
-				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] py-4 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-4 md:mx-0 md:w-auto md:px-8 md:py-8"
+				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-[#e7e0ec] bg-[#f3edf7] px-2 py-4 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-4 md:px-8 md:py-8"
 			>
 				<div class="mb-1 text-xl md:text-4xl">🎯</div>
 				<h2 class="font-cinzel text-xs font-semibold tracking-wider text-[#6750a4] md:text-lg">
