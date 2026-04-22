@@ -10,6 +10,7 @@ export default defineConfig({
 		SvelteKitPWA({
 			registerType: 'autoUpdate',
 			manifest: {
+				id: '/',
 				name: 'Brahmi Glyph',
 				short_name: 'Brahmi Glyph',
 				description: 'Learn the ancient Brahmi script through interactive lessons',
@@ -38,6 +39,10 @@ export default defineConfig({
 				globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
 				globIgnores: ['**/logo.png'],
 				maximumFileSizeToCacheInBytes: 6 * 1024 * 1024
+			},
+			devOptions: {
+				enabled: true,
+				navigateFallback: '/'
 			}
 		})
 	]
