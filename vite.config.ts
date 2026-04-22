@@ -9,29 +9,7 @@ export default defineConfig({
 		sveltekit(),
 		SvelteKitPWA({
 			registerType: 'autoUpdate',
-			manifest: {
-				name: 'Brahmi Glyph',
-				short_name: 'Brahmi Glyph',
-				description: 'Learn the ancient Brahmi script through interactive lessons',
-				theme_color: '#6750a4',
-				background_color: '#fef7ff',
-				display: 'standalone',
-				orientation: 'portrait',
-				scope: '/',
-				start_url: '/',
-				icons: [
-					{
-						src: '/images/icon-192.png',
-						sizes: '192x192',
-						type: 'image/png'
-					},
-					{
-						src: '/images/icon-512.png',
-						sizes: '512x512',
-						type: 'image/png'
-					}
-				]
-			},
+			manifest: false,
 			workbox: {
 				globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
 				globIgnores: ['**/logo.png'],
