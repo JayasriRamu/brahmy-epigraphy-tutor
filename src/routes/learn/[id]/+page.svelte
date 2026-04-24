@@ -147,15 +147,19 @@
 	</style>
 </svelte:head>
 
-<div class="relative min-h-screen w-full bg-slate-100">
-	<div class="mx-auto flex max-w-7xl gap-8 p-8 lg:pt-20">
+<div
+	class="fixed inset-0 w-full overflow-y-auto bg-slate-100 lg:relative lg:block lg:h-auto lg:min-h-screen lg:overflow-visible"
+>
+	<div
+		class="mx-auto flex min-h-full flex-col justify-between p-3 pb-24 lg:max-w-7xl lg:gap-4 lg:p-4 lg:pt-8 lg:pb-10"
+	>
 		{#if showPhaseComplete}
-			<div class="phase-complete absolute inset-0 z-50 flex items-center justify-center">
+			<div class="phase-complete fixed inset-0 z-50 flex items-center justify-center lg:absolute">
 				<div
-					class="animate-bounce rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-8 py-4 text-center shadow-xl"
+					class="animate-bounce rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-6 py-3 text-center shadow-xl"
 				>
-					<p class="text-2xl font-bold text-white">Phase Complete!</p>
-					<p class="text-sm text-amber-100">Moving to Consonants...</p>
+					<p class="text-xl font-bold text-white">Phase Complete!</p>
+					<p class="text-xs text-amber-100">Moving to Consonants...</p>
 				</div>
 			</div>
 			<div class="confetti">
@@ -168,18 +172,18 @@
 			</div>
 		{/if}
 
-		<div class="sticky top-8 hidden h-[calc(100vh-8rem)] w-1/2 lg:block">
+		<div class="hidden lg:sticky lg:top-8 lg:block lg:h-[calc(100vh-8rem)] lg:w-1/2">
 			<div
-				class="hero-card flex h-full w-full flex-col items-center justify-center rounded-3xl p-8 text-center"
+				class="hero-card flex h-full w-full flex-col items-center justify-center rounded-2xl p-6 text-center lg:rounded-3xl lg:p-8"
 			>
 				{#if currentItem}
 					<span
-						class="mb-4 inline-block rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold tracking-widest text-amber-600 uppercase"
+						class="mb-2 inline-block rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold tracking-widest text-amber-600 uppercase lg:mb-4 lg:px-3 lg:py-1"
 					>
 						{currentItem.type}
 					</span>
 
-					<div class="glow-animate text-[14rem] leading-none">
+					<div class="glow-animate text-[8rem] leading-none lg:text-[14rem]">
 						<span class="brahmi-carved text-amber-500">
 							{currentItem.brahmi}
 						</span>
@@ -188,13 +192,13 @@
 			</div>
 		</div>
 
-		<div class="flex w-full flex-col gap-6 lg:w-1/2">
-			<div class="mb-4">
+		<div class="flex w-full flex-col gap-2 lg:w-1/2 lg:gap-6">
+			<div>
 				<a
 					href="/inscriptions/{data.inscription.id}"
-					class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-sm font-medium text-slate-600 shadow-md transition-all hover:text-slate-800 hover:shadow-lg"
+					class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-md transition-all hover:text-slate-800 hover:shadow-lg lg:gap-2 lg:px-5 lg:py-2 lg:text-sm"
 				>
-					<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="h-3 w-3 lg:h-4 lg:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -202,46 +206,71 @@
 							d="M15 19l-7-7 7-7"
 						/>
 					</svg>
-					Return to Inscription
+					<span class="hidden lg:inline">Return to Inscription</span>
+					<span class="lg:hidden">Back</span>
 				</a>
 			</div>
 
-			<div class="mb-4 text-center lg:text-left">
+			<div class="text-center lg:text-left">
 				<h1
-					class="mb-2 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-3xl font-bold tracking-tight text-transparent"
+					class="mb-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-400 bg-clip-text text-xl font-bold tracking-tight text-transparent lg:text-3xl"
 				>
 					{data.inscription.name}
 				</h1>
-				<p class="text-sm font-medium tracking-widest text-slate-500 uppercase">{phaseLabel}</p>
+				<p class="text-xs font-medium tracking-widest text-slate-500 uppercase">{phaseLabel}</p>
 			</div>
 
-			<div class="grid grid-cols-3 gap-4">
-				<div class="comparison-box rounded-2xl bg-white p-6 text-center shadow-md">
-					<p class="mb-2 text-[10px] tracking-widest text-slate-500 uppercase">Brahmi</p>
+			<div class="glow-animate text-center text-5xl leading-none lg:hidden">
+				<span class="brahmi-carved text-amber-500">
+					{currentItem?.brahmi}
+				</span>
+			</div>
+
+			<div class="grid grid-cols-3 gap-1 lg:gap-4">
+				<div
+					class="comparison-box rounded-xl bg-white p-2 text-center shadow-md lg:rounded-2xl lg:p-6"
+				>
+					<p
+						class="mb-1 text-[6px] tracking-widest text-slate-500 uppercase lg:mb-2 lg:text-[10px]"
+					>
+						Brahmi
+					</p>
 					{#if currentItem}
-						<p class="brahmi text-3xl text-amber-500">{currentItem.brahmi}</p>
+						<p class="brahmi text-lg text-amber-500 lg:text-3xl">{currentItem.brahmi}</p>
 					{/if}
 				</div>
-				<div class="comparison-box rounded-2xl bg-white p-6 text-center shadow-md">
-					<p class="mb-2 text-[10px] tracking-widest text-slate-500 uppercase">Tamil</p>
+				<div
+					class="comparison-box rounded-xl bg-white p-2 text-center shadow-md lg:rounded-2xl lg:p-6"
+				>
+					<p
+						class="mb-1 text-[6px] tracking-widest text-slate-500 uppercase lg:mb-2 lg:text-[10px]"
+					>
+						Tamil
+					</p>
 					{#if currentItem}
-						<p class="serif text-3xl text-emerald-600">{currentItem.tamil}</p>
+						<p class="serif text-lg text-emerald-600 lg:text-3xl">{currentItem.tamil}</p>
 					{/if}
 				</div>
-				<div class="comparison-box rounded-2xl bg-white p-6 text-center shadow-md">
-					<p class="mb-2 text-[10px] tracking-widest text-slate-500 uppercase">English</p>
+				<div
+					class="comparison-box rounded-xl bg-white p-2 text-center shadow-md lg:rounded-2xl lg:p-6"
+				>
+					<p
+						class="mb-1 text-[6px] tracking-widest text-slate-500 uppercase lg:mb-2 lg:text-[10px]"
+					>
+						English
+					</p>
 					{#if currentItem}
-						<p class="serif text-3xl text-slate-700 italic">{currentItem.phonetic}</p>
+						<p class="serif text-lg text-slate-700 italic lg:text-3xl">{currentItem.phonetic}</p>
 					{/if}
 				</div>
 			</div>
 
-			<div class="flex items-center justify-center gap-6">
+			<div class="flex items-center justify-center gap-2 lg:gap-6">
 				<button
 					onclick={previous}
-					class="nav-btn btn-3d btn-3d-ghost flex h-14 w-14 items-center justify-center rounded-full p-0 transition-all duration-300 hover:scale-110 active:scale-95"
+					class="nav-btn btn-3d btn-3d-ghost flex h-10 w-10 items-center justify-center rounded-full p-0 transition-all duration-300 hover:scale-110 active:scale-95 lg:h-14 lg:w-14"
 				>
-					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="h-4 w-4 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -254,14 +283,14 @@
 				{#if isComplete}
 					<a
 						href="/inscriptions/{data.inscription.id}"
-						class="btn-3d btn-3d-success flex h-14 items-center justify-center px-12 font-semibold transition-all duration-300"
+						class="btn-3d btn-3d-success flex h-10 items-center justify-center px-4 font-semibold transition-all duration-300 lg:h-14 lg:px-12"
 					>
 						Finish
 					</a>
 				{:else}
 					<button
 						onclick={next}
-						class="btn-3d btn-3d-primary flex h-14 items-center justify-center px-12 font-semibold transition-all duration-300"
+						class="btn-3d btn-3d-primary flex h-10 items-center justify-center px-4 font-semibold transition-all duration-300 lg:h-14 lg:px-12"
 					>
 						{currentPhase === 'consonants' && currentIndex >= currentLesson.length - 2
 							? 'Complete'
@@ -271,9 +300,9 @@
 
 				<button
 					onclick={next}
-					class="nav-btn btn-3d btn-3d-ghost flex h-14 w-14 items-center justify-center rounded-full p-0 transition-all duration-300 hover:scale-110 active:scale-95"
+					class="nav-btn btn-3d btn-3d-ghost flex h-10 w-10 items-center justify-center rounded-full p-0 transition-all duration-300 hover:scale-110 active:scale-95 lg:h-14 lg:w-14"
 				>
-					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<svg class="h-4 w-4 lg:h-6 lg:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -284,8 +313,10 @@
 				</button>
 			</div>
 
-			<div class="mt-8 rounded-2xl bg-white p-6 shadow-md">
-				<div class="mb-3 flex justify-between text-xs font-medium tracking-widest uppercase">
+			<div class="rounded-xl bg-white p-3 shadow-md lg:rounded-2xl lg:p-6">
+				<div
+					class="mb-2 flex justify-between text-[10px] font-medium tracking-widest uppercase lg:mb-3 lg:text-xs"
+				>
 					<span class={currentPhase === 'vowels' ? 'text-amber-500' : 'text-slate-400'}>
 						Uyir (Vowels)
 					</span>
@@ -294,7 +325,7 @@
 					</span>
 				</div>
 
-				<div class="relative flex h-4 gap-1">
+				<div class="relative flex h-3 gap-1 lg:h-4">
 					<div class="flex-1">
 						<div
 							class="h-full overflow-hidden rounded-full bg-slate-200 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]"
@@ -326,7 +357,7 @@
 					</div>
 				</div>
 
-				<div class="mt-3 flex justify-between text-xs text-slate-500">
+				<div class="mt-2 flex justify-between text-[10px] text-slate-500 lg:mt-3 lg:text-xs">
 					<span>
 						{currentPhase === 'vowels' ? currentIndex + 1 : allVowels.length} / {allVowels.length}
 					</span>
@@ -336,9 +367,8 @@
 				</div>
 			</div>
 
-			<div class="mt-auto space-y-4 py-8 text-center text-xs text-slate-400">
+			<div class="mt-auto py-2 text-center text-[10px] text-slate-400 lg:py-8 lg:text-xs">
 				<p>Use ← → keys or buttons to navigate</p>
-				<p>Swipe on mobile for next/previous character</p>
 			</div>
 		</div>
 	</div>

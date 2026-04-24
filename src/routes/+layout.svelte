@@ -37,7 +37,7 @@
 			href="/"
 			class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl bg-[#6750a4] shadow-md lg:h-12 lg:w-12"
 		>
-			<img src="/images/logo.png" alt="Logo" class="h-8 w-8 object-contain lg:h-10 lg:w-10" />
+			<img src="/images/logoblue.jpeg" alt="Logo" class="h-8 w-8 object-contain lg:h-10 lg:w-10" />
 		</a>
 		<div class="mt-8 flex flex-col gap-2">
 			{#each navItems as item}
@@ -74,7 +74,7 @@
 			class="fixed right-0 bottom-0 left-0 z-50 flex h-16 flex-shrink-0 items-center justify-around border-t border-[#e7e0ec] bg-[#f3edf7] md:hidden"
 		>
 			<a href="/" class="flex items-center justify-center">
-				<img src="/images/logo.png" alt="Logo" class="h-8 w-8 object-contain" />
+				<img src="/images/logoblue.jpeg" alt="Logo" class="h-8 w-8 object-contain" />
 			</a>
 			{#each navItems as item}
 				<a

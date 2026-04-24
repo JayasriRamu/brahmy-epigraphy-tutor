@@ -18,11 +18,12 @@
 		</div>
 
 		<!-- Bento Grid -->
-		<div class="grid w-full grid-cols-1 gap-4 pt-4 md:grid-cols-12 md:grid-rows-2 md:gap-6 md:pt-0">
+		<div class="grid w-full grid-cols-1 gap-6 pt-6 md:grid-cols-12 md:grid-rows-2 md:gap-6 md:pt-0">
 			<!-- Learn Card (big) -->
 			<a
 				href="/learn"
 				class="bento-card col-span-1 flex flex-col items-center justify-center rounded-xl border border-purple-100 bg-[#f3edf7] px-2 py-6 text-center transition-all duration-300 hover:border-[#6750a4] hover:shadow-lg md:col-span-8 md:row-span-2 md:px-12 md:py-10"
+				style="margin-top: 20px;"
 			>
 				<div class="mb-2 text-2xl md:text-5xl">📜</div>
 				<h2
@@ -34,20 +35,20 @@
 					Master the ancient Brahmi script
 				</p>
 				<div class="mb-2" style="margin-bottom: 6px;"></div>
-				<div class="flex gap-2 md:gap-4">
+				<div class="flex flex-wrap justify-center gap-3 md:gap-4">
 					<span
-						class="rounded-full border border-[#6750a4]/20 bg-[#6750a4]/10 px-2 py-1 text-xs text-[#6750a4] md:px-4 md:py-1.5 md:text-sm"
+						class="rounded-full border border-[#6750a4]/20 bg-[#6750a4]/10 px-8 py-2 text-base font-medium text-[#6750a4] md:px-4 md:py-1.5 md:text-sm"
 						>12 Vowels</span
 					>
 					<span
-						class="rounded-full border border-[#6750a4]/20 bg-[#6750a4]/10 px-2 py-1 text-xs text-[#6750a4] md:px-4 md:py-1.5 md:text-sm"
+						class="rounded-full border border-[#6750a4]/20 bg-[#6750a4]/10 px-8 py-2 text-base font-medium text-[#6750a4] md:px-4 md:py-1.5 md:text-sm"
 						>18 Consonants</span
 					>
 				</div>
 				<div style="margin-bottom: 20px;"></div>
 				<button
 					style="padding-left: 30px; padding-right: 30px;"
-					class="rounded-full bg-[#6750a4] py-2 text-xs font-bold text-white shadow-md hover:bg-[#775fd0] md:px-10 md:py-3 md:text-base"
+					class="rounded-full bg-[#6750a4] py-2 text-sm font-bold text-white shadow-md hover:bg-[#775fd0] md:px-10 md:py-3 md:text-base"
 					>Start Learning</button
 				>
 			</a>
